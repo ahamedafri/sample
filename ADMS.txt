@@ -1,0 +1,16 @@
+commit - to make changes quicky / to save current changes
+
+rollback - [if you have committed a change you can't rollback] 
+
+view - [we can create something like virtual table from actual table , and view table doesn't have physical memory]
+     - [command --- >   CREATE VIEW n as SELECT * FROM STUD;]
+     
+to create a copy of a table - [create view n as select * from emp;]
+
+primary ke alternative method - [ eno int(10) unique not null; ]
+
+default - it works when the column is empty - [ create table pos1(eno int(10) , p int(3) default(10));]
+
+check -  create table pos4(eno int(3), p int(3), check (p<10));  ---> this will give error if we add value > 10
+
+constraint - to add key word

@@ -1,1 +1,9 @@
-dsdsds
+1) display the student registration number who pass the examination
+2) display student reg number and marks for the student who got 40 =<
+
+
+1) display the names and salaries of marketing department employees
+2) diplay the table in ascending order of the salary
+3) display the total salary distributed for each department
+4)display the name of the employee who gets minimum salary in their department
+5) the organinzation decide to give 20% bonus for only for marketing department, display emplloyee name and the bonus 

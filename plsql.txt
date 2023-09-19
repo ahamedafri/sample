@@ -1,0 +1,105 @@
+                                     PL/SQL
+                                       |
+                               ________|____________
+                              |         |           |
+                           procedure   function    Trigers
+
+-------------------------------------------
+1) Declaration (optioanal)
+2) Execution (mandatory) - sql 
+3) Exception (optional) - for error handling
+
+create Procedure X(procedure name Eg; X) 
+IS/AS
+Begin statement
+SQL - Insert into Emp values(1,'X');
+End statement
+
+Eg:- 
+  
+   CREATE PROCEDURE
+   procedure_name
+      [(parameter[,parameter])] 
+   IS
+      [declaration_section]
+   BEGIN
+      executable_section
+   [EXCEPTION
+         exception_section]
+   END [procedure_name]; 
+
+
+[] - optional
+
+
+Eg:- 
+  create procedure x
+  is 
+  Begin
+  Insert into Employee values(1,'x');
+  end;
+
+  * above one is just a object , it won't be executable 
+    if you want to execute
+     
+        >>>>   exe x;
+
+Eg:-
+
+  create procedure y @eno int(10)
+  as
+  insert into emp values(@eno,'d');
+  end;
+
+  exe y @eno=1;
+
+
+Eg:- 
+  create procedure y @eno int,@name varchar(20)
+  as
+  insert into emp values(@eno,'d');
+  end;
+
+  exec y @eno=1,@name='nn';
+ 
+ 
+Eg:
+ create a procedure with argument to display the name of the employee for given Eno?
+ (display the name of the person wh's eno = 1)   
+  
+  sir's answer { 
+  create procedure s @eno int
+  begin
+  select name from employee where eno=@eno ;
+  end;
+
+}
+
+  
+  CREATE PROCEDURE z
+  @eno INT
+  AS 
+  BEGIN
+  SELECT name FROM employee WHERE eno = @eno;
+  END;
+
+ exec z @eno=1;
+------------------------------------------------ SEQUENCE ----------------------------------------------------------------
+
+
+------------------------------------------------- CURSOR ------------------------------------------------------------------
+
+create procedure f 
+as
+CURSOR d IS
+select * from employee where eno<20;
+FOR a IN d LOOP
+DBMS_OUTPUT.PUT_LINE('eno:'|| a.eno|| CHR(9) || ' Name:' || a.name);
+end loop;
+end;
+
+
+here,
+  d - cursor name
+  a - record
+ 

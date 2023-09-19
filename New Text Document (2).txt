@@ -1,0 +1,238 @@
+
+Setting environment for using XAMPP for Windows.
+User@AFRI c:\xampp
+# -h localhost -u root -p
+'-h' is not recognized as an internal or external command,
+operable program or batch file.
+
+User@AFRI c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 11
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use nsbm;
+Database changed
+MariaDB [nsbm]>  insert into table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr,7000),(4,'hr',6000),(5,'fin',3000);
+    '> use nsbm;Bye
+
+User@AFRI c:\xampp
+# -h localhost -u root -p
+'-h' is not recognized as an internal or external command,
+operable program or batch file.
+
+User@AFRI c:\xampp
+# mysql -h localhost -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 12
+Server version: 10.4.27-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use nsbm;
+Database changed
+MariaDB [nsbm]>  insert into table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5,'fin',3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5...' at line 1
+MariaDB [nsbm]>  insert into table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5,'fin',3000),;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5...' at line 1
+MariaDB [nsbm]>  insert into table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5,'fin',3000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5...' at line 1
+MariaDB [nsbm]> describe emp
+    -> ;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| eno   | int(10)     | NO   | PRI | NULL    |       |
+| dep   | varchar(10) | YES  |     | NULL    |       |
+| sal   | int(10)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.017 sec)
+
+MariaDB [nsbm]>  insert into table emp values(1,'hr',50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table emp values(1,'hr',50000)' at line 1
+MariaDB [nsbm]>  insert into table emp values(1,"hr",50000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table emp values(1,"hr",50000)' at line 1
+MariaDB [nsbm]> insert into student values(3,'aaa2',2000);
+ERROR 1062 (23000): Duplicate entry '3' for key 'PRIMARY'
+MariaDB [nsbm]>  insert into  emp values(1,'hr',50000),(2,'fin',12000),(3,'hr',7000),(4,'hr',6000),(5,'fin',3000);
+Query OK, 5 rows affected (0.003 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [nsbm]> select sum(sal) as total from emp;
++-------+
+| total |
++-------+
+| 78000 |
++-------+
+1 row in set (0.001 sec)
+
+MariaDB [nsbm]> select max(sal), dep as total from emp group by dep;
++----------+-------+
+| max(sal) | total |
++----------+-------+
+|    12000 | fin   |
+|    50000 | hr    |
++----------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [nsbm]> select * from emp;
++-----+------+-------+
+| eno | dep  | sal   |
++-----+------+-------+
+|   1 | hr   | 50000 |
+|   2 | fin  | 12000 |
+|   3 | hr   |  7000 |
+|   4 | hr   |  6000 |
+|   5 | fin  |  3000 |
++-----+------+-------+
+5 rows in set (0.001 sec)
+
+MariaDB [nsbm]> select sal>SELECT dep, SUM(sal) AS total_salary
+    -> FROM employees
+    -> GROUP BY dep
+    -> HAVING total_salary > 60000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELECT dep, SUM(sal) AS total_salary
+FROM employees
+GROUP BY dep
+HAVING total...' at line 1
+MariaDB [nsbm]> SELECT dep, SUM(sal) AS total_salary
+    -> FROM employees
+    -> GROUP BY dep
+    -> HAVING total_salary > 60000;
+ERROR 1146 (42S02): Table 'nsbm.employees' doesn't exist
+MariaDB [nsbm]> SELECT dep, SUM(sal) AS total_salary
+    -> FROM employees
+    -> GROUP BY dep
+    -> HAVING total_salary > 60000;
+ERROR 1146 (42S02): Table 'nsbm.employees' doesn't exist
+MariaDB [nsbm]> SELECT dep, SUM(sal) AS total_salary
+    -> FROM employees
+    -> GROUP BY dep
+    ->
+    -> ;
+ERROR 1146 (42S02): Table 'nsbm.employees' doesn't exist
+MariaDB [nsbm]> SELECT dep, SUM(sal) AS total_salary
+    -> FROM employees
+    -> GROUP BY dep
+    -> GROUP BY dep^Z^Z^Z^Z^Z^Z;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'GROUP BY dep' at line 4
+MariaDB [nsbm]> SELECT dep, SUM(sal) AS total_salary
+    -> FROM emp
+    -> GROUP BY dep
+    -> HAVING total_salary > 60000;
++------+--------------+
+| dep  | total_salary |
++------+--------------+
+| hr   |        63000 |
++------+--------------+
+1 row in set (0.001 sec)
+
+MariaDB [nsbm]> select sum(sal) from emp group by dep;
++----------+
+| sum(sal) |
++----------+
+|    15000 |
+|    63000 |
++----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nsbm]> select sum(sal) from emp as depart group by dep;
++----------+
+| sum(sal) |
++----------+
+|    15000 |
+|    63000 |
++----------+
+2 rows in set (0.001 sec)
+
+MariaDB [nsbm]> select sum(sal) as depart from emp  group by dep;
++--------+
+| depart |
++--------+
+|  15000 |
+|  63000 |
++--------+
+2 rows in set (0.001 sec)
+
+MariaDB [nsbm]> create table ( eno int(10), name varchar(30) , dep varchar(30), sal int(10), primary key(eno));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '( eno int(10), name varchar(30) , dep varchar(30), sal int(10), primary key(e...' at line 1
+MariaDB [nsbm]> create table ( eno int(10), name varchar(30) , dep varchar(30), sal int(10), primary key eno);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '( eno int(10), name varchar(30) , dep varchar(30), sal int(10), primary key eno)' at line 1
+MariaDB [nsbm]> create table ( eno int(10) primary key, name varchar(30) , dep varchar(30), sal int(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '( eno int(10) primary key, name varchar(30) , dep varchar(30), sal int(10))' at line 1
+MariaDB [nsbm]> create table employee ( eno int(10) primary key, name varchar(30) , dep varchar(30), sal int(10));
+Query OK, 0 rows affected (0.014 sec)
+
+MariaDB [nsbm]> describe employee;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| eno   | int(10)     | NO   | PRI | NULL    |       |
+| name  | varchar(30) | YES  |     | NULL    |       |
+| dep   | varchar(30) | YES  |     | NULL    |       |
+| sal   | int(10)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.017 sec)
+
+MariaDB [nsbm]> insert into employee values(1,'A','HR',10000),(2,'B','FIN',30000),(3,'C','MAR',40000),(4,'D','MAR',30000),(5,'E','FIN',20000),(6,'F','HR',50000),(7,'G','HR',40000),(8,'H','HR',10000);
+Query OK, 8 rows affected (0.003 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+MariaDB [nsbm]> select * from employee;
++-----+------+------+-------+
+| eno | name | dep  | sal   |
++-----+------+------+-------+
+|   1 | A    | HR   | 10000 |
+|   2 | B    | FIN  | 30000 |
+|   3 | C    | MAR  | 40000 |
+|   4 | D    | MAR  | 30000 |
+|   5 | E    | FIN  | 20000 |
+|   6 | F    | HR   | 50000 |
+|   7 | G    | HR   | 40000 |
+|   8 | H    | HR   | 10000 |
++-----+------+------+-------+
+8 rows in set (0.000 sec)
+
+MariaDB [nsbm]> SELECT name,sal FROM employee WHERE dep ='MAR';
++------+-------+
+| name | sal   |
++------+-------+
+| C    | 40000 |
+| D    | 30000 |
++------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [nsbm]> SELECT * FROM employee ORDER BY sal ASC;
++-----+------+------+-------+
+| eno | name | dep  | sal   |
++-----+------+------+-------+
+|   1 | A    | HR   | 10000 |
+|   8 | H    | HR   | 10000 |
+|   5 | E    | FIN  | 20000 |
+|   2 | B    | FIN  | 30000 |
+|   4 | D    | MAR  | 30000 |
+|   3 | C    | MAR  | 40000 |
+|   7 | G    | HR   | 40000 |
+|   6 | F    | HR   | 50000 |
++-----+------+------+-------+
+8 rows in set (0.001 sec)
+
+MariaDB [nsbm]> SELECT dep,SUM(sal) as total_salary FROM employee GROUP BY dep;
++------+--------------+
+| dep  | total_salary |
++------+--------------+
+| FIN  |        50000 |
+| HR   |       110000 |
+| MAR  |        70000 |
++------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [nsbm]>

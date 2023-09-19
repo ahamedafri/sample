@@ -1,0 +1,65 @@
+EMP                  SAL
+
+eno | name          eno | sal 
+1      A             1     20000
+2      B             2     30000
+
+
+1)max salary =  select max(sal) from SAL;
+
+2) person A salary 
+
+  steps
+     =>> select eno from emp where name='A';   //finding eno number so that is 1
+     =>> select sal from SAL where eno=1;
+
+3) display the name of the employee who is getting 30000 as salary
+
+    =>> select eno from SAL where sal = 30000;  // so answer is 2
+    =>> select name from EMP where eno = 2;
+
+------------------------------------------------------------------------------------
+ mysql -h localhost -u root -p
+ use nsbm
+ create table EMP3 ( eno int(10) , name varchar(20));
+ create table SAL3 ( eno int(10) , sal int(10));
+ insert into EMP3 values(1,"A"),(2,"B");
+ insert into SAL3 values(1,30000),(2,30000);
+--------------------------------------------------------------------------------------
+ 
+alternative answer for 2) 
+  =>>  select SAL3.eno,name,sal from EMP3,SAL3 where EMP3.eno=SAL3.eno and name="A";
+
++------+------+-------+
+| eno  | name | sal   |
++------+------+-------+
+|    1 | A    | 30000 |
++------+------+-------+
+
+
+
+
+display emp no,name and salary who getting more than 10000
+
+=>> select eno,sal  from EMP3 where sal > 10000;
+
+
+--------------------------------------------------------------------------------------------------
+
+
+
+STU                  RES
+
+sno | name          sno | res 
+1      A             1     "pass"
+2      B             2     "fail"
+                     3     "distinction"
+
+1) display student name who got distinction for their results
+
+       ==> select STU.sno,name,res from STU,RES where STU.sno=RES.sno and res = "destinction"    
+---------------------------------------------------------------------------------------------------------
+
+for natural join --> both feilds should have the same name and data type.   
+
+joins , equili joins      
